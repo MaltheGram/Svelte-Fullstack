@@ -10,5 +10,8 @@ Clean up package.json both front and backend
 <hr>
 Encode user input. Don't trust that shit
 <hr>
+Fetch memes only once, loop over array, insert img src
+<br>
+<b>Usage:</b> Less fetches and network stress
 
 
