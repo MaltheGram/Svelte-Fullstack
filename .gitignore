@@ -6,6 +6,7 @@ server/.env
 
 # Editor
 .idea
+.vscode
 
 ### Node ###
 # Logs
