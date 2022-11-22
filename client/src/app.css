@@ -1,0 +1,17 @@
+@import "toastr";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: aliceblue;
+    margin: 1.25em;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}

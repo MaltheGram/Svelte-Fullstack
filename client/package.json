@@ -1,0 +1,25 @@
+{
+  "name": "client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^1.0.2",
+    "sass": "^1.56.1",
+    "svelte": "^3.49.0",
+    "vite": "^3.1.0"
+  },
+  "dependencies": {
+    "@sveltejs/adapter-node": "^1.0.0-next.100",
+    "nodemailer": "^6.8.0",
+    "svelte-navigator": "^3.2.2",
+    "svelte-preprocess": "^4.10.7",
+    "svelte-store": "^0.0.2",
+    "toastr": "^2.1.4"
+  }
+}

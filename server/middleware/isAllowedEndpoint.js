@@ -1,0 +1,3 @@
+const isAllowedEndpoint = (req, res) => {
+
+}
