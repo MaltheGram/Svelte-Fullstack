@@ -3,7 +3,7 @@ import bcrypt from "bcrypt"
 import mysql from "mysql"
 
 import {db} from "../../database/database.js";
-import {isAdmin} from "../../middleware/adminAuth.js";
+import {getUserDataApi} from "../../middleware/adminAuth.js";
 
 const router = Router()
 
@@ -49,12 +49,12 @@ router.post("/auth/login", (req, res) => {
 
 router.post("/auth/signup", async (req, res) => {
     console.log("Reached signup post")
-    const userName = req.body.name
+    const userName = req.body.userName
     const userEmail = req.body.email
-    const hashedPassword = await bcrypt.hash(req.body.password)
-    console.log(hashedPassword)
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
     const role = "user"
     let isLoggedIn = false
+    console.log({req: req.body})
 
     console.log("Before connection")
     db.getConnection(async (error, connection) => {
@@ -77,8 +77,6 @@ router.post("/auth/signup", async (req, res) => {
                 res.sendStatus(409)
             } else {
                 await connection.query(insertQuery, async (error, result) => {
-                    connection.release()
-
                     await connection.query(searchQuery, async (error, result) => {
                         console.log({result})
                         const sessionUserRole = result[0].role
@@ -92,13 +90,15 @@ router.post("/auth/signup", async (req, res) => {
                         console.log({session: req.session})
                         res.redirect("/")
                     })
+
                 })
+
             }
         })
     })
 })
 
-router.get("/api/auth/userdata", isAdmin, (req, res) => {
+router.get("/api/auth/userdata", getUserDataApi, (req, res) => {
 })
 
 export default router

@@ -1,18 +1,18 @@
 import {Router} from "express"
-import {isAdmin} from "../../middleware/adminAuth.js";
+import {getUserDataApi} from "../../middleware/adminAuth.js";
 
 const router = Router()
 
 router.get("/api/session", (req, res) => {
     if (req.session.isLoggedIn) {
-        res.send({data: req.session})
+        res.status(200).send({data: req.session})
     } else {
-        res.send({data: "Not logged in"})
+        res.status(400).send({data: "Not logged in"}) // TODO: Correct status code??? Checkup
     }
 })
 router.get("/api/sessiondestroy", (req, res) => {
     req.session.destroy()
-    res.redirect("/")
+    res.redirect("/api/session")
 })
 
 export default router

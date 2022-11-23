@@ -1,6 +1,8 @@
 import mysql from "mysql";
 import db from "../database/database.js";
-export const isAdmin = (req, res) => {
+
+// This API should not actually exist due to security issues! This is for testing purpose only.
+export const getUserDataApi = (req, res) => {
     const session = req.session
     if (session.isLoggedIn && session.userRole === "admin") {
         db.getConnection(async (error, connection) => {

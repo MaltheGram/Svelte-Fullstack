@@ -1,4 +1,5 @@
 <script>
+    import {BASE_URL} from "../../../stores/globals.js";
     toastr.options = {
         "closeButton": false,
         "positionClass": "toast-bottom-center",
@@ -16,7 +17,7 @@
 
     let email = ''
     const submit = async () => {
-        await fetch("/api/recovery", {
+        await fetch(`${$BASE_URL}/api/recovery`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

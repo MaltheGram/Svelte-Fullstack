@@ -1,6 +1,7 @@
 <script>
     import {Router, Link} from "svelte-navigator";
     import {onMount} from "svelte";
+    import {BASE_URL} from "../../stores/globals.js";
 
     let userRole = ""
     let userName = "Not logged in"
@@ -26,19 +27,28 @@
 
 
     const userStatus = () => {
-        fetch("/api/session")
+        fetch(`${$BASE_URL}/api/session`, {
+            method: "GET",
+            credentials: "include"
+        })
             .then(res => res.json())
             .then((data) => {
                 if (data.data.isLoggedIn) {
+                    console.log("In if")
                     userRole = data.data.userRole
                     userName = data.data.user
                     isLoggedIn = true
                     toastr["success"](`Welcome ${userName}`, "Logged in")
                 }
             })
+
+
     }
     const logOut = () => {
-        fetch("/api/sessiondestroy")
+        fetch(`${$BASE_URL}/api/sessiondestroy`,{
+            method: "GET",
+            credentials: "include"
+        })
         setTimeout(() => {
                 location.reload()
             }, 1000
@@ -59,12 +69,11 @@
         {#if isLoggedIn === false}
             <span>{userName}</span>
         {:else}
-            <span>Welcome {userName}</span>
+            <span>Welcome <b>{userName}<b/></span>
             <Link on:click={logOut} to="/">Logout</Link>
         {/if}
     </nav>
 </Router>
-
 <style lang="scss">
   nav {
     background-color: #404046;
