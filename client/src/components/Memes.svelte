@@ -9,7 +9,6 @@
         fetch(memeUrl)
             .then(res => res.json())
             .then((data) => {
-                console.log(data)
                 src = data.url
                 alt = data.title
             })
@@ -25,8 +24,6 @@
     onMount(
         changeImageInterval
     )
-    changeImageBtn
-
 </script>
 
 

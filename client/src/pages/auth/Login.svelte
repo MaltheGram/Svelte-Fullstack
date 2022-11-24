@@ -1,17 +1,31 @@
 <script>
-    import {Link} from "svelte-navigator"
+    import {Link, navigate} from "svelte-navigator"
+    import {token} from "../../../stores/globals.js"
+
     import ForgotPassword from "./ForgotPassword.svelte"
-    import {BASE_URL} from "../../../stores/globals.js";
+    import {BASE_URL} from "../../../stores/globals.js"
+    toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+        "positionClass": "toast-top-center",
+        "preventDuplicates": true,
+        "onclick": null,
+        "showDuration": "3000",
+        "hideDuration": "0",
+        "timeOut": "9000",
+        "showMethod": "fadeIn",
+        "extendedTimeOut": "1000",
+    }
+
 
     let isVisible = false
-
-    export const recoverPasswordButton = () => {
+    const recoverPasswordButton = () => {
         isVisible = true
     }
     let email = ""
     let password = ""
     const login = async () => {
-        await fetch(`${$BASE_URL}/auth/login`, {
+        const response = await fetch(`${$BASE_URL}/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -19,10 +33,19 @@
             body: JSON.stringify({email, password}),
             credentials: "include"
         })
-        location.reload()
+        if (response.status === 200){
+            //TODO: Rather do this with a truly random number, and a hash value
+            const secretTokenValue = Math.floor(Math.random() * 25).toString()
+            localStorage.setItem("token", secretTokenValue)
+            token.set(localStorage.getItem("token"))
+            navigate("/memes", {replace:true})
+            location.reload()
+        } else
+        {
+            response.status === 404
+            toastr["error"]("Login failed.<br>Email or password was incorrect.<br>Please try again")
+        }
     }
-
-
 </script>
 
 <div class="container">
@@ -57,6 +80,8 @@
 
 
 <style lang="scss">
+  @import "../../styles/forms.css";
+
   .container {
     margin: auto;
     width: 25%;
@@ -67,7 +92,6 @@
     }
 
   }
-
   .recover-btn {
     margin-top: 0.75em;
     padding: 1em 2.25em;
@@ -75,32 +99,5 @@
 
     border: 1px solid #ccc;
     background-color: transparent;
-  }
-
-  input[type=text],
-  input[type=password],
-  input[type=email] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-
-  button[type=submit] {
-    width: 100%;
-    background-color: #04AA6D;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #45a049;
-    }
   }
 </style>

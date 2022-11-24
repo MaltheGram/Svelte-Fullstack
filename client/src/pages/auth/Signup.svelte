@@ -36,6 +36,7 @@
 </div>
 
 <style lang="scss">
+  @import "../../styles/forms.css";
   .container {
     margin: auto;
     width: 25%;
@@ -43,33 +44,6 @@
 
     h1 {
       margin: 1em 0;
-    }
-  }
-
-  input[type=text],
-  input[type=password],
-  input[type=email] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-
-  button[type=submit] {
-    width: 100%;
-    background-color: #04AA6D;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #45a049;
     }
   }
 </style>

@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "@sveltejs/adapter-node": "^1.0.0-next.100",
-    "nodemailer": "^6.8.0",
     "svelte-navigator": "^3.2.2",
     "svelte-preprocess": "^4.10.7",
     "svelte-store": "^0.0.2",
