@@ -36,7 +36,7 @@ router.post("/auth/login", (req, res) => {
                         req.session.user = sessionUserName
                         req.session.isLoggedIn = isLoggedIn
                         console.log("Login Successful")
-                        res.redirect("/")
+                        res.status(200).redirect("/")
                     })
                 } else {
                     console.log("Login failed")
@@ -98,7 +98,5 @@ router.post("/auth/signup", async (req, res) => {
     })
 })
 
-router.get("/api/auth/userdata", getUserDataApi, (req, res) => {
-})
-
+router.get("/api/auth/userdata", getUserDataApi)
 export default router

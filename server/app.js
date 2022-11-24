@@ -7,16 +7,13 @@ app.use(cors({
     credentials: true,
     origin: true
 }))
-import path from "path";
 
 app.use(express.urlencoded({
     extended: true
 }))
 app.use(express.json())
 
-app.use(express.static(path.resolve("../client/dist")))
 import session from "express-session"
-
 const maxAge = 100 * 60 * 60
 const sessionName = "malthe-cookie"
 
@@ -43,13 +40,9 @@ app.use(forgotPasswordRouter)
 import sessionRouter from "./routers/sessionRouters/sessionRouter.js"
 app.use(sessionRouter)
 
-import fs from "fs"
-
-const page = fs.readFileSync("../client/dist/index.html").toString()
 app.get('*', (req, res) => {
-    res.send(page)
+    res.send("<h1> 404 Site not found. </h1>")
 });
-
 
 const PORT = process.env.PORT || 8080
 app.listen(PORT, () => {
