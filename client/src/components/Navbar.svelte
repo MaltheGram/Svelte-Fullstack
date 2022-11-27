@@ -56,7 +56,7 @@
     }
     const notImplementedYet = () => {
         // To show that user profile is not implemeted when clicking on user profile name
-        toastr["warning"]("User profile not implemented.. Redirecting to root")
+        toastr["warning"]("User profile not implemented.")
     }
 
     onMount(

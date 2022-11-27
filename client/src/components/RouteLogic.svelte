@@ -7,6 +7,7 @@
     import Memes from "./Memes.svelte";
 
     $: isAuthenticated = $token
+    const isLoggedIn = isAuthenticated
 
 
 </script>
@@ -19,7 +20,7 @@
     <Route path="/auth/signup">
         <Signup/>
     </Route>
-    {#if isAuthenticated}
+    {#if isLoggedIn}
     <Route path="/memes">
         <Memes/>
     </Route>

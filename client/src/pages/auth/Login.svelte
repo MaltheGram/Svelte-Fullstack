@@ -1,7 +1,7 @@
 <script>
     import {Link, navigate} from "svelte-navigator"
     import {token} from "../../../stores/globals.js"
-
+    import { v4 as uuidv4 } from 'uuid';
     import ForgotPassword from "./ForgotPassword.svelte"
     import {BASE_URL} from "../../../stores/globals.js"
     toastr.options = {
@@ -34,9 +34,7 @@
             credentials: "include"
         })
         if (response.status === 200){
-            //TODO: Rather do this with a truly random number, and a hash value
-            const secretTokenValue = Math.floor(Math.random() * 25).toString()
-            localStorage.setItem("token", secretTokenValue)
+            localStorage.setItem("token", "1")
             token.set(localStorage.getItem("token"))
             navigate("/memes", {replace:true})
             location.reload()

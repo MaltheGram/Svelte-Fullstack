@@ -19,6 +19,7 @@
     "svelte-navigator": "^3.2.2",
     "svelte-preprocess": "^4.10.7",
     "svelte-store": "^0.0.2",
-    "toastr": "^2.1.4"
+    "toastr": "^2.1.4",
+    "uuid": "^9.0.0"
   }
 }
